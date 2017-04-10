@@ -28,6 +28,21 @@ var albumMarconi = {
     ]
 };
 
+var albumSevenLions = {
+    title: 'Worlds Apart EP',
+    artist: 'Seven lions',
+    label: 'Casablanca Records',
+    year: '2014',
+    albumArtUrl: 'assets/images/album_covers/19.png',
+    songs: [
+        { title: "Don't Leave", duration: '6:02' },
+        { title: 'Worlds Apart', duration: '6:16' },
+        { title: 'Nepenthe', duration: '5:16'},
+        { title: 'Strangers', duration: '3:24' },
+        { title: 'Keep It Close', duration: '5:12'}
+    ]
+};
+
 var createSongRow = function(songNumber, songName, songLength) {
     var template =
        '<tr class="album-view-song-item">'
@@ -40,14 +55,13 @@ var createSongRow = function(songNumber, songName, songLength) {
     return template;
 };
 
-var setCurrentAlbum = function(album) {
-
     var albumTitle = document.getElementsByClassName('album-view-title')[0];
     var albumArtist = document.getElementsByClassName('album-view-artist')[0];
     var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
     var albumImage = document.getElementsByClassName('album-cover-art')[0];
     var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
 
+var setCurrentAlbum = function(album) {
     albumTitle.firstChild.nodeValue = album.title;
     albumArtist.firstChild.nodeValue = album.artist;
     albumReleaseInfo.firstChild.nodeValue = album.year + ' ' + album.label;
@@ -62,4 +76,14 @@ var setCurrentAlbum = function(album) {
 
 window.onload = function() {
     setCurrentAlbum(albumPicasso);
+
+    var albums = [albumPicasso, albumMarconi, albumSevenLions];
+    var index = 1;
+    albumImage.addEventListener("click", function(event) {
+      setCurrentAlbum(albums[index]);
+      index++;
+      if (index == album.length) {
+          index = 0;
+      }
+    });
 };
